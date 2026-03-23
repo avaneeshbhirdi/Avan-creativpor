@@ -92,7 +92,7 @@ li { list-style: none; }
   padding: 10px 20px;
   box-shadow: var(--shadow-solid);
   border-radius: 0;
-  color: #000;
+  color: var(--color-bg);
   transition: all var(--transition-fast);
 }
 .status-badge:hover {
