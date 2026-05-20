@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaneesh Bhirdi | Creative Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 
 
 </head>
+
 <body class="spa-mode">
+
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
@@ -35,7 +39,7 @@
         <section id="home" class="page-section active">
             <div class="hero-content-left">
                 <h1 class="hero-name">Avaneesh<br>Bhirdi</h1>
-                
+
                 <div class="marquee-container">
                     <div class="marquee-content">
                         <span>DIRECTOR • CINEMATOGRAPHER • EDITOR • GRAPHIC DESIGNER • </span>
@@ -56,10 +60,22 @@
                     <h2>Professional Experience</h2>
                 </div>
                 <div class="services-grid">
-                    <div class="service-card"><i data-lucide="video" class="service-icon"></i><h3>Directing</h3><p>Guiding the cohesive creative vision on set and leading production teams to success.</p></div>
-                    <div class="service-card"><i data-lucide="camera" class="service-icon"></i><h3>Cinematography</h3><p>Capturing breathtaking cinematic visuals with an expert eye for lighting and composition.</p></div>
-                    <div class="service-card"><i data-lucide="scissors" class="service-icon"></i><h3>Editing</h3><p>Weaving raw footage into compelling stories. Expert in pacing, rhythm, and grading.</p></div>
-                    <div class="service-card"><i data-lucide="pen-tool" class="service-icon"></i><h3>Graphic Design</h3><p>Creating striking visual identities, vibrant posters, and cutting-edge digital assets.</p></div>
+                    <div class="service-card"><i data-lucide="video" class="service-icon"></i>
+                        <h3>Directing</h3>
+                        <p>Guiding the cohesive creative vision on set and leading production teams to success.</p>
+                    </div>
+                    <div class="service-card"><i data-lucide="camera" class="service-icon"></i>
+                        <h3>Cinematography</h3>
+                        <p>Capturing breathtaking cinematic visuals with an expert eye for lighting and composition.</p>
+                    </div>
+                    <div class="service-card"><i data-lucide="scissors" class="service-icon"></i>
+                        <h3>Editing</h3>
+                        <p>Weaving raw footage into compelling stories. Expert in pacing, rhythm, and grading.</p>
+                    </div>
+                    <div class="service-card"><i data-lucide="pen-tool" class="service-icon"></i>
+                        <h3>Graphic Design</h3>
+                        <p>Creating striking visual identities, vibrant posters, and cutting-edge digital assets.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -68,22 +84,39 @@
         <section id="skills" class="page-section">
             <div class="glass-panel mockup-panel split-panel">
                 <div class="panel-left">
-                    <div class="software-grid">
-                        <div class="soft-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="PR"><span>Premiere</span></div>
-                        <div class="soft-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="AE"><span>After Effects</span></div>
-                        <div class="soft-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="PS"><span>Photoshop</span></div>
-                        <div class="soft-item"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="AI"><span>Illustrator</span></div>
-                        <div class="soft-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/DaVinci_Resolve_Studio.png" alt="DR"><span>DaVinci</span></div>
+                    <!-- Heading and Filter Buttons -->
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; width: 100%;">
+                        <h3 class="section-heading-yellow" style="margin-bottom: 0;">Softwares I Mastered</h3>
+                        <div class="software-filters" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="soft-filter-btn active" onclick="filterSoftware('all', this)">All</button>
+                            <button class="soft-filter-btn" onclick="filterSoftware('video', this)">Video
+                                Editing</button>
+                            <button class="soft-filter-btn" onclick="filterSoftware('music', this)">Music
+                                Editing</button>
+                            <button class="soft-filter-btn" onclick="filterSoftware('vfx', this)">VFX</button>
+                            <button class="soft-filter-btn"
+                                onclick="filterSoftware('designing', this)">Designing</button>
+                        </div>
                     </div>
 
-                    <div class="languages-section">
-                        <h3 class="section-heading-yellow">Core Strengths</h3>
-                        <div class="lang-bar"><span class="lang-name">Video Editing</span><div class="progress-wrap"><div class="progress-fill" style="width: 95%;"></div></div></div>
-                        <div class="lang-bar"><span class="lang-name">Storytelling</span><div class="progress-wrap"><div class="progress-fill" style="width: 90%;"></div></div></div>
-                        <div class="lang-bar"><span class="lang-name">Cinematography</span><div class="progress-wrap"><div class="progress-fill" style="width: 85%;"></div></div></div>
+                    <div class="software-carousel-container"
+                        style="position: relative; margin-bottom: 50px; width: 100%; display: flex; align-items: center;">
+                        <button id="scroll-btn-left" onclick="scrollSoftware('left')"
+                            style="position: absolute; left: -40px; z-index: 10; width: 45px; height: 45px; border-radius: 50%; background: #fff; border: var(--border-thick); box-shadow: 2px 2px 0 #000; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; padding: 0; min-height: 45px; visibility: hidden; transition: all 0.2s;"><i
+                                data-lucide="chevron-left" style="width: 24px; height: 24px;"></i></button>
+
+                        <div class="software-grid" id="software-scroll" onscroll="updateScrollButtons()"
+                            style="display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 20px; padding: 20px 10px; margin: -20px 0; -ms-overflow-style: none; scrollbar-width: none; flex: 1; position: relative; z-index: 5;">
+                            <!-- Dynamically loaded via main.js -->
+                        </div>
+
+                        <button id="scroll-btn-right" onclick="scrollSoftware('right')"
+                            style="position: absolute; right: -40px; z-index: 10; width: 45px; height: 45px; border-radius: 50%; background: #fff; border: var(--border-thick); box-shadow: 2px 2px 0 #000; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; padding: 0; min-height: 45px; transition: all 0.2s;"><i
+                                data-lucide="chevron-right" style="width: 24px; height: 24px;"></i></button>
                     </div>
 
-                    <div class="education-section" style="margin-top: 40px;">
+                    <div class="education-section">
                         <h3 class="section-heading-yellow">Education & Certificates</h3>
                         <ul class="edu-list">
                             <li>
@@ -98,19 +131,65 @@
                     </div>
                 </div>
 
-                <!-- Right: Flowstate detailed view -->
-                <div class="panel-right project-detail-card">
-                    <button class="back-btn" onclick="switchSection('links', document.querySelector('.slide-btn[data-target=links]'))"><i data-lucide="chevron-left"></i> Go to Works</button>
-                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=800" alt="Project" class="project-img">
-                    <h2 class="project-title-yellow">Silent Screams</h2>
-                    <span class="project-subtitle">Short Film Cinematic Experience</span>
-                    
-                    <div class="project-desc">
-                        <h4 class="sub-heading">About The Project</h4>
-                        <p>Directed and shot a suspenseful psychological thriller exploring human isolation. Integrated aggressive color grading techniques to emphasize mood and tension.</p>
-                        
-                        <h4 class="sub-heading">Achievements</h4>
-                        <p>Nominated for Best Cinematography at the Annual Indie Film Festival. Reached 50k views on YouTube within a month.</p>
+                <!-- Right Panel: Core Strengths Radar Chart -->
+                <div class="panel-right" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 40px 30px;">
+                    <h3 class="section-heading-yellow" style="margin-bottom: 15px; align-self: flex-start;">Core Strengths Web</h3>
+                    <div id="radar-chart-container" style="position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                        <div id="radar-tooltip" style="position: absolute; pointer-events: none; opacity: 0; background: var(--color-primary); color: #fff; padding: 6px 12px; font-weight: 900; border: var(--border-thick); box-shadow: 4px 4px 0 #000; font-size: 0.85rem; text-transform: uppercase; transform: translate(-50%, -120%); transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100;">
+                            Video Editing: 95%
+                        </div>
+                        <!-- Dynamic SVG goes here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="page-section">
+            <div class="glass-panel mockup-panel split-panel" style="flex-direction: column;">
+                <div class="panel-header" style="padding: 30px 30px 0;">
+                    <h2>Projects</h2>
+                </div>
+
+                <!-- Main list view -->
+                <div id="projects-list-view" style="padding: 0 30px 30px; display: block;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
+                        <button class="slide-btn active" id="sort-recent" onclick="sortProjects('recent')"
+                            style="box-shadow: 2px 2px 0 #000;">Recent</button>
+                        <button class="slide-btn" id="sort-popular" onclick="sortProjects('popular')">Popular</button>
+                        <button class="slide-btn" id="sort-oldest" onclick="sortProjects('oldest')">Oldest</button>
+                        <input type="text" id="project-search" placeholder="Search projects..."
+                            onkeyup="searchProjects()"
+                            style="padding: 10px 15px; border: var(--border-thick); font-family: var(--font-main); font-weight: 700; flex: 1; min-width: 200px; box-shadow: 4px 4px 0 #000; outline: none; background: #fff; color: #000; font-size: 1rem;">
+                    </div>
+
+                    <div class="portfolio-grid" id="projects-container">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Detail view -->
+                <div id="projects-detail-view" style="display: none; padding: 0 30px 30px;">
+                    <button class="back-btn" onclick="closeProjectDetail()"
+                        style="margin-bottom: 20px; background: #fff; border: var(--border-thick); font-weight: 700; padding: 10px 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; box-shadow: 4px 4px 0 #000; text-transform: uppercase;"><i
+                            data-lucide="chevron-left"></i> Back to Projects</button>
+
+                    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+                        <img src="" alt="Project" id="proj-detail-img"
+                            style="width: 100%; max-width: 450px; height: 350px; object-fit: cover; border: var(--border-thick); box-shadow: 8px 8px 0 #000;">
+
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2 class="project-title-yellow" id="proj-detail-title" style="margin-bottom: 10px;">Title
+                            </h2><br>
+                            <span class="project-subtitle" id="proj-detail-subtitle"
+                                style="margin-bottom: 20px; display: inline-block;">Subtitle</span>
+
+                            <div class="project-desc">
+                                <h4 class="sub-heading">Description</h4>
+                                <p id="proj-detail-desc"
+                                    style="font-size: 1.1rem; line-height: 1.6; color: #000; font-weight: 600;"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,15 +197,34 @@
 
         <!-- Links / Work Section -->
         <section id="links" class="page-section">
-            <div class="glass-panel mockup-panel">
-                <div class="panel-header">
-                    <h2>Selected Projects</h2>
+            <div class="glass-panel mockup-panel"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="panel-header" style="margin-bottom: 40px;">
+                    <h2>Contact & Socials</h2>
                 </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item"><div class="item-inner"><img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=600" alt=""><div class="item-overlay"><h3>Neon Nights</h3></div></div></div>
-                    <div class="portfolio-item"><div class="item-inner"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=600" alt=""><div class="item-overlay"><h3>The Last Drop</h3></div></div></div>
-                    <div class="portfolio-item"><div class="item-inner"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600" alt=""><div class="item-overlay"><h3>Urban Vlog</h3></div></div></div>
+                <div style="display: flex; flex-direction: column; gap: 25px; width: 100%; max-width: 450px;">
+                    <a href="https://www.youtube.com/@worthit.productions" target="_blank" class="social-btn youtube"
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #FF0000; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
+                        <img src="https://cdn.simpleicons.org/youtube/white"
+                            style="width: 36px; height: 36px; object-fit: contain;" alt="YouTube" /> YouTube
+                    </a>
+                    <a href="https://www.instagram.com/avaneeshbhirdi/" target="_blank" class="social-btn instagram"
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #E1306C; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
+                        <img src="https://cdn.simpleicons.org/instagram/white"
+                            style="width: 36px; height: 36px; object-fit: contain;" alt="Instagram" /> Instagram
+                    </a>
+                    <a href="https://www.linkedin.com/in/avaneeshbhirdi/" target="_blank" class="social-btn linkedin"
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #0A66C2; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
+                        <img src="https://cdn.simpleicons.org/linkedin/white"
+                            style="width: 36px; height: 36px; object-fit: contain;" alt="LinkedIn" /> LinkedIn
+                    </a>
                 </div>
+                <style>
+                    .social-btn:hover {
+                        transform: translate(4px, 4px);
+                        box-shadow: 4px 4px 0 #000 !important;
+                    }
+                </style>
             </div>
         </section>
 
@@ -144,6 +242,9 @@
         <button class="slide-btn" data-target="skills" onclick="switchSection('skills', this)">
             <i data-lucide="zap"></i> <span>Skills</span>
         </button>
+        <button class="slide-btn" data-target="projects" onclick="switchSection('projects', this)">
+            <i data-lucide="folder"></i> <span>Projects</span>
+        </button>
         <button class="slide-btn" data-target="links" onclick="switchSection('links', this)">
             <i data-lucide="link"></i> <span>Links</span>
         </button>
@@ -155,4 +256,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>
