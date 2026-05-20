@@ -125,7 +125,7 @@ window.renderSoftware = function() {
     }, 50);
 };
 
-const projectsData = [
+const defaultProjects = [
     {
         id: 1,
         title: "Neon Nights",
@@ -163,6 +163,20 @@ const projectsData = [
         desc: "A high-end commercial for a premium audio brand. Handled the cinematography, focusing on sleek product shots and lifestyle integration."
     }
 ];
+
+let projectsData = [];
+try {
+    const stored = localStorage.getItem('portfolio_projects');
+    if (stored) {
+        projectsData = JSON.parse(stored);
+    } else {
+        projectsData = [...defaultProjects];
+        localStorage.setItem('portfolio_projects', JSON.stringify(projectsData));
+    }
+} catch (e) {
+    console.error("Failed to load projects from localStorage:", e);
+    projectsData = [...defaultProjects];
+}
 
 let currentSort = 'recent';
 let searchQuery = '';
@@ -268,11 +282,11 @@ window.initRadarChart = function() {
     const coreStrengthsData = [
         { name: "Video Editing", value: 95 },
         { name: "Motion Graphics", value: 85 },
-        { name: "Designing", value: 90 },
+        { name: "Cinematography", value: 90 },
         { name: "VFX", value: 65 },
         { name: "Music Editing", value: 75 },
         { name: "Storytelling", value: 90 },
-        { name: "Cinematography", value: 90 },
+        { name: "Designing", value: 90 },
         { name: "Writing & Scripting", value: 95 }
     ];
 
@@ -280,11 +294,13 @@ window.initRadarChart = function() {
     const height = 450;
     const cx = 225;
     const cy = 225;
-    const maxR = 135; // max radius for 100%
+    const maxR = 140; // max radius for 100%
+    const minX = -50;
+    const viewBoxWidth = 550;
 
     const svgNamespace = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNamespace, "svg");
-    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.setAttribute("viewBox", `${minX} 0 ${viewBoxWidth} ${height}`);
     svg.setAttribute("style", "width: 100%; height: 100%; overflow: visible; font-family: inherit;");
 
     // 1. Draw concentric background polygons (20%, 40%, 60%, 80%, 100%)
@@ -357,7 +373,7 @@ window.initRadarChart = function() {
         const x = cx + r * Math.cos(angle);
         const y = cy + r * Math.sin(angle);
 
-        const pctX = (x / width) * 100;
+        const pctX = ((x - minX) / viewBoxWidth) * 100;
         const pctY = (y / height) * 100;
 
         tooltip.style.left = `${pctX}%`;
@@ -406,7 +422,7 @@ window.initRadarChart = function() {
         const angle = (i * 45 - 90) * Math.PI / 180;
 
         // Axis labels
-        const labelDist = maxR + 25;
+        const labelDist = maxR + 18;
         const lx = cx + labelDist * Math.cos(angle);
         const ly = cy + labelDist * Math.sin(angle);
 

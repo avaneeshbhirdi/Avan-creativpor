@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avan Portfolio | Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+
+    <!-- Back to Site Link -->
+    <div class="back-to-site">
+        <a href="index.html" class="btn btn-secondary">
+            ← Back To Portfolio
+        </a>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login-section" class="login-container">
+        <div class="login-card">
+            <h2>Admin Login</h2>
+            <div id="login-error" class="error-message"></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="admin" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px; box-shadow: 4px 4px 0 #000;">
+                    Log In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <h1>Avan Control Panel</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="resetToDefault()">
+                    Reset to Default
+                </button>
+                <button class="btn btn-secondary" onclick="copyCodeConfig()" style="background: #A9C2FF;">
+                    Copy JS Config
+                </button>
+                <button class="btn btn-primary" onclick="openAddModal()">
+                    + Add Project
+                </button>
+                <button class="btn btn-danger" onclick="logout()">
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="label">Total Projects</span>
+                <span class="value" id="stat-total-projects">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Cumulative Views</span>
+                <span class="value" id="stat-total-views">0</span>
+            </div>
+            <div class="stat-card" style="background: var(--color-accent-blue);">
+                <span class="label">Most Popular</span>
+                <span class="value" id="stat-popular-project" style="font-size: 1.4rem; font-weight: 900; margin-top: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">None</span>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+            <div class="table-header-row">
+                <h3>Portfolio Projects List</h3>
+            </div>
+            <table class="project-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Image</th>
+                        <th>Project Title</th>
+                        <th style="width: 180px;">Category</th>
+                        <th style="width: 140px;">Release Date</th>
+                        <th style="width: 140px;">Views</th>
+                        <th style="width: 160px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                    <!-- Loaded dynamically via js/admin.js -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Project Dialog Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Project</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <form id="project-form">
+                <div class="modal-body">
+                    <input type="hidden" id="project-id">
+                    
+                    <div class="form-group">
+                        <label for="proj-title">Project Title</label>
+                        <input type="text" id="proj-title" class="form-input" required placeholder="e.g. Neon Nights">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="proj-category">Category</label>
+                            <select id="proj-category" class="form-input" style="height: 48px; font-weight: 700; background: #fff;" required>
+                                <option value="Music Video">Music Video</option>
+                                <option value="Short Film">Short Film</option>
+                                <option value="Docu-series">Docu-series</option>
+                                <option value="Commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="proj-date">Release Date</label>
+                            <input type="date" id="proj-date" class="form-input" style="height: 48px;" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="proj-views">View Count</label>
+                            <input type="number" id="proj-views" class="form-input" min="0" required placeholder="125000">
+                        </div>
+                        <div class="form-group">
+                            <label for="proj-img">Thumbnail Image URL</label>
+                            <input type="url" id="proj-img" class="form-input" required placeholder="https://images.unsplash.com/photo-...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="proj-desc">Project Description</label>
+                        <textarea id="proj-desc" class="form-input" rows="4" style="resize: vertical; font-family: inherit;" required placeholder="Provide a compelling description of the project, including your role and visual direction..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Action completed successfully</div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
