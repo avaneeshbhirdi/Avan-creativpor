@@ -312,6 +312,7 @@ window.openAddModal = function() {
     projectForm.reset();
     projectIdInput.value = '';
     document.getElementById('proj-detail-title-input').value = '';
+    document.getElementById('proj-roles').value = '';
     document.getElementById('proj-img-data').value = '';
     document.getElementById('proj-img-preview').src = '';
     document.getElementById('proj-img-preview-container').style.display = 'none';
@@ -346,7 +347,7 @@ window.openEditModal = function(id) {
         document.getElementById('proj-img-preview-container').style.display = 'none';
     }
     
-    
+    document.getElementById('proj-roles').value = p.roles ? p.roles.join(', ') : '';
     document.getElementById('proj-desc').value = p.desc;
     
     const container = document.getElementById('proj-links-container');
@@ -394,6 +395,8 @@ projectForm.addEventListener('submit', (e) => {
         return;
     }
     const desc = document.getElementById('proj-desc').value.trim();
+    const rolesInput = document.getElementById('proj-roles').value.trim();
+    const roles = rolesInput ? rolesInput.split(',').map(r => r.trim()).filter(r => r !== '') : [];
     
     const links = [];
     const linkRows = document.querySelectorAll('.link-row');
@@ -418,6 +421,7 @@ projectForm.addEventListener('submit', (e) => {
                 views,
                 img,
                 desc,
+                roles,
                 links
             };
             showToast('Project updated successfully!', 'success');
@@ -434,6 +438,7 @@ projectForm.addEventListener('submit', (e) => {
             views,
             img,
             desc,
+            roles,
             links
         };
         projects.push(newProject);

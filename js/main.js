@@ -359,6 +359,27 @@ window.openProjectDetail = function(id) {
             linksContainer.appendChild(btn);
         });
         
+        // Render project roles badges
+        const rolesContainer = document.getElementById('proj-detail-roles');
+        const rolesWrapper = document.getElementById('proj-detail-roles-container');
+        if (rolesContainer && rolesWrapper) {
+            rolesContainer.innerHTML = '';
+            if (proj.roles && Array.isArray(proj.roles) && proj.roles.length > 0) {
+                proj.roles.forEach((role, idx) => {
+                    const badge = document.createElement('span');
+                    badge.className = 'project-subtitle';
+                    // Alternate rotation for playful hand-crafted neo-brutalist feel
+                    const rot = (idx % 2 === 0) ? 1.5 : -1.5;
+                    badge.style.cssText = `margin-bottom: 0px; display: inline-block; transform: rotate(${rot}deg);`;
+                    badge.innerText = role;
+                    rolesContainer.appendChild(badge);
+                });
+                rolesWrapper.style.display = 'block';
+            } else {
+                rolesWrapper.style.display = 'none';
+            }
+        }
+        
         if (window.lucide) {
             lucide.createIcons();
         }
