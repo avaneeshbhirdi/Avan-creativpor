@@ -186,6 +186,19 @@ const defaultProjects = [
 let projectsData = [];
 
 async function initProjects() {
+    const customized = localStorage.getItem('portfolio_projects_customized');
+    const stored = localStorage.getItem('portfolio_projects');
+    
+    if (customized === 'true' && stored) {
+        try {
+            projectsData = JSON.parse(stored);
+            console.log("Loaded customized projects from localStorage");
+            return;
+        } catch (e) {
+            console.error("Failed to parse customized projects from localStorage", e);
+        }
+    }
+
     try {
         const res = await fetch('/js/projects.json');
         if (res.ok) {
@@ -198,7 +211,6 @@ async function initProjects() {
     } catch (e) {
         console.warn("Could not load from projects.json, loading from localStorage/defaults:", e);
         try {
-            const stored = localStorage.getItem('portfolio_projects');
             if (stored) {
                 projectsData = JSON.parse(stored);
             } else {
@@ -314,14 +326,21 @@ window.openProjectDetail = function(id) {
         // Filter out any links that don't have a URL
         links = links.filter(link => link.url && link.url.trim() !== '');
         
+        // If links exist and none have the isMain property, set the first one as main
+        if (links.length > 0 && !links.some(l => l.isMain !== undefined)) {
+            links[0].isMain = true;
+            for (let i = 1; i < links.length; i++) {
+                links[i].isMain = false;
+            }
+        }
+        
         links.forEach((link, index) => {
             const btn = document.createElement('a');
             btn.href = link.url;
             btn.target = "_blank";
             
-            // Primary link (Red) if explicitly marked as main. Fallback to index === 0 if no links have the isMain property defined.
-            const hasIsMainProperty = links.some(l => l.isMain !== undefined);
-            const isPrimary = hasIsMainProperty ? (link.isMain === true) : (index === 0);
+            // Primary link (Red) if explicitly marked as main.
+            const isPrimary = link.isMain === true;
             
             if (isPrimary) {
                 // Primary link (Red)

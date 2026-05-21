@@ -103,6 +103,19 @@ window.logout = function() {
 
 // --- DATA ACCESS ---
 async function loadProjects() {
+    const customized = localStorage.getItem('portfolio_projects_customized');
+    const stored = localStorage.getItem('portfolio_projects');
+    
+    if (customized === 'true' && stored) {
+        try {
+            projects = JSON.parse(stored);
+            console.log("Loaded customized projects from localStorage");
+            return;
+        } catch (e) {
+            console.error("Failed to parse customized projects from localStorage", e);
+        }
+    }
+
     try {
         const res = await fetch('/js/projects.json');
         if (res.ok) {
@@ -115,7 +128,6 @@ async function loadProjects() {
     } catch (e) {
         console.warn("Could not load from projects.json, loading from localStorage/defaults:", e);
         try {
-            const stored = localStorage.getItem('portfolio_projects');
             if (stored) {
                 projects = JSON.parse(stored);
             } else {
@@ -129,6 +141,7 @@ async function loadProjects() {
 }
 
 async function saveProjects() {
+    localStorage.setItem('portfolio_projects_customized', 'true');
     localStorage.setItem('portfolio_projects', JSON.stringify(projects));
     
     try {
@@ -446,10 +459,26 @@ window.deleteProject = function(id) {
 
 window.resetToDefault = function() {
     if (confirm('Are you sure you want to RESET all data to default projects? This will discard your custom projects!')) {
-        projects = [...defaultProjects];
-        saveProjects();
-        renderDashboard();
-        showToast('Reset completed successfully!', 'success');
+        localStorage.removeItem('portfolio_projects_customized');
+        fetch('/js/projects.json')
+            .then(res => {
+                if (res.ok) return res.json();
+                throw new Error();
+            })
+            .then(data => {
+                projects = data;
+                saveProjects();
+                localStorage.removeItem('portfolio_projects_customized');
+                renderDashboard();
+                showToast('Reset completed successfully!', 'success');
+            })
+            .catch(() => {
+                projects = [...defaultProjects];
+                saveProjects();
+                localStorage.removeItem('portfolio_projects_customized');
+                renderDashboard();
+                showToast('Reset completed successfully!', 'success');
+            });
     }
 };
 

@@ -207,40 +207,420 @@
         <!-- Links / Work Section -->
         <section id="links" class="page-section">
             <div class="glass-panel mockup-panel"
-                style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
                 <div class="panel-header" style="margin-bottom: 40px;">
                     <h2>Contact & Socials</h2>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 25px; width: 100%; max-width: 450px;">
-                    <a href="https://www.youtube.com/@worthit.productions" target="_blank" class="social-btn youtube"
-                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #FF0000; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
-                        <img src="https://cdn.simpleicons.org/youtube/white"
-                            style="width: 36px; height: 36px; object-fit: contain;" alt="YouTube" /> YouTube
-                    </a>
-                    <a href="https://www.instagram.com/avaneeshbhirdi/" target="_blank" class="social-btn instagram"
-                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #E1306C; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
-                        <img src="https://cdn.simpleicons.org/instagram/white"
-                            style="width: 36px; height: 36px; object-fit: contain;" alt="Instagram" /> Instagram
-                    </a>
-                    <a href="https://www.linkedin.com/in/avaneeshbhirdi/" target="_blank" class="social-btn linkedin"
-                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #0A66C2; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0;">
-                          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
-                        </svg> LinkedIn
-                    </a>
-                    <a href="https://wa.me/918073137078" target="_blank" class="social-btn whatsapp"
-                        style="display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 900; color: #fff; background: #25D366; padding: 20px; border: var(--border-thick); box-shadow: 8px 8px 0 #000; text-transform: uppercase; transition: all 0.2s;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0;">
-                          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                        </svg> WhatsApp
-                    </a>
+                
+                <div class="contact-container">
+                    <!-- Column 1: Direct Message Form (Left) -->
+                    <div class="contact-column form-column">
+                        <div class="column-header">
+                            <h3>Direct Message</h3>
+                        </div>
+                        <form id="direct-contact-form" class="brutal-form">
+                            <!-- Hidden anti-spam honeypot -->
+                            <input type="text" name="_honey" style="display:none">
+                            <!-- Disable ReCaptcha for silent submit experience -->
+                            <input type="hidden" name="_captcha" value="false">
+                            
+                            <div class="form-group">
+                                <label for="contact-email">YOUR EMAIL</label>
+                                <input type="email" id="contact-email" name="email" placeholder="Enter your email address" required autocomplete="email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-message">YOUR MESSAGE</label>
+                                <textarea id="contact-message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" id="contact-submit-btn">
+                                <span>SEND MESSAGE</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;">
+                                  <line x1="22" y1="2" x2="11" y2="13" />
+                                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                </svg>
+                            </button>
+                            <div id="form-status" class="form-status-msg" style="display: none;"></div>
+                        </form>
+                    </div>
+
+                    <!-- Column 2: Socials & Links (Right) -->
+                    <div class="contact-column socials-column">
+                        <div class="column-header">
+                            <h3>Socials & Links</h3>
+                        </div>
+                        <div class="social-buttons-list">
+                            <a href="https://www.youtube.com/@worthit.productions" target="_blank" class="social-btn youtube">
+                                <img src="https://cdn.simpleicons.org/youtube/white" alt="YouTube" /> YouTube
+                            </a>
+                            <a href="https://www.instagram.com/avaneeshbhirdi/" target="_blank" class="social-btn instagram">
+                                <img src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" /> Instagram
+                            </a>
+                            <a href="https://www.linkedin.com/in/avaneeshbhirdi/" target="_blank" class="social-btn linkedin">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                                </svg> LinkedIn
+                            </a>
+                            <a href="https://wa.me/918073137078" target="_blank" class="social-btn whatsapp">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                                </svg> WhatsApp
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
                 <style>
-                    .social-btn:hover {
+                    /* Contact Grid Layout */
+                    .contact-container {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 50px;
+                        width: 100%;
+                        max-width: 950px;
+                        margin-top: 10px;
+                    }
+                    
+                    .contact-column {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .form-column {
+                        flex: 1.3;
+                    }
+                    
+                    .socials-column {
+                        flex: 1;
+                        align-items: flex-end;
+                    }
+                    
+                    .column-header h3 {
+                        font-size: 1.8rem;
+                        margin-bottom: 25px;
+                        color: #000;
+                        font-weight: 800;
+                        text-transform: uppercase;
+                        background: var(--color-accent-blue);
+                        display: inline-block;
+                        padding: 6px 15px;
+                        border: 3px solid #000;
+                        box-shadow: 4px 4px 0 #000;
+                        transform: rotate(1deg);
+                    }
+                    
+                    .socials-column .column-header h3 {
+                        background: var(--color-secondary);
+                        transform: rotate(-1deg);
+                    }
+                    
+                    /* Neo-Brutalist Form */
+                    .brutal-form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                        width: 100%;
+                    }
+                    
+                    .form-group {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                    }
+                    
+                    .form-group label {
+                        font-size: 1rem;
+                        font-weight: 900;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        color: #000;
+                        text-align: left;
+                    }
+                    
+                    .form-group input,
+                    .form-group textarea {
+                        width: 100%;
+                        padding: 12px 16px;
+                        font-size: 1rem;
+                        font-family: var(--font-main);
+                        font-weight: 600;
+                        border: var(--border-thick);
+                        background: #fff;
+                        box-shadow: 4px 4px 0 #000;
+                        transition: all 0.15s ease;
+                        outline: none;
+                        color: #000;
+                    }
+                    
+                    .form-group input:focus,
+                    .form-group textarea:focus {
+                        transform: translate(-2px, -2px);
+                        box-shadow: 6px 6px 0 var(--color-primary);
+                        background: #fff;
+                    }
+                    
+                    /* Form Send Button */
+                    #contact-submit-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        background: var(--color-primary);
+                        color: #fff;
+                        font-family: var(--font-main);
+                        font-weight: 900;
+                        font-size: 1.1rem;
+                        text-transform: uppercase;
+                        padding: 15px 30px;
+                        border: var(--border-thick);
+                        box-shadow: 6px 6px 0 #000;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                        width: 100%;
+                        margin-top: 10px;
+                    }
+                    
+                    #contact-submit-btn:hover {
+                        transform: translate(2px, 2px);
+                        box-shadow: 4px 4px 0 #000;
+                        background: var(--color-secondary);
+                        color: #000;
+                    }
+                    
+                    #contact-submit-btn:active {
                         transform: translate(4px, 4px);
-                        box-shadow: 4px 4px 0 #000 !important;
+                        box-shadow: 0px 0px 0 #000;
+                    }
+                    
+                    #contact-submit-btn svg {
+                        transition: transform 0.3s ease;
+                    }
+                    
+                    #contact-submit-btn:hover svg {
+                        transform: translate(2px, -2px) scale(1.1);
+                    }
+                    
+                    /* Smaller Social Buttons */
+                    .social-buttons-list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                        width: 100%;
+                        max-width: 320px;
+                    }
+                    
+                    .social-buttons-list .social-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        font-size: 1.1rem;
+                        font-weight: 900;
+                        color: #fff;
+                        padding: 12px 20px;
+                        border: var(--border-thick);
+                        box-shadow: 4px 4px 0 #000;
+                        text-transform: uppercase;
+                        transition: all 0.2s;
+                        width: 100%;
+                    }
+                    
+                    .social-buttons-list .social-btn img,
+                    .social-buttons-list .social-btn svg {
+                        width: 24px;
+                        height: 24px;
+                        object-fit: contain;
+                    }
+                    
+                    .social-buttons-list .youtube { background: #FF0000; }
+                    .social-buttons-list .instagram { background: #E1306C; }
+                    .social-buttons-list .linkedin { background: #0A66C2; }
+                    .social-buttons-list .whatsapp { background: #25D366; }
+                    
+                    .social-buttons-list .social-btn:hover {
+                        transform: translate(2px, 2px);
+                        box-shadow: 2px 2px 0 #000 !important;
+                    }
+                    
+                    /* Form status responses */
+                    .form-status-msg {
+                        padding: 12px 16px;
+                        font-weight: 800;
+                        border: 3px solid #000;
+                        box-shadow: 4px 4px 0 #000;
+                        text-align: center;
+                        text-transform: uppercase;
+                        font-size: 0.95rem;
+                        margin-top: 15px;
+                    }
+                    .form-status-msg.success {
+                        background: #25D366;
+                        color: #000;
+                    }
+                    .form-status-msg.error {
+                        background: #FF0000;
+                        color: #fff;
+                    }
+                    .form-status-msg.sending {
+                        background: var(--color-accent-blue);
+                        color: #000;
+                    }
+                    
+                    /* Responsive Sizing */
+                    @media (max-width: 900px) {
+                        .contact-container {
+                            flex-direction: column;
+                            gap: 40px;
+                        }
+                        
+                        .socials-column {
+                            align-items: flex-start;
+                        }
+                        
+                        .social-buttons-list {
+                            max-width: 100%;
+                        }
                     }
                 </style>
+                
+                <script>
+                    document.getElementById('direct-contact-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const form = e.target;
+                        const statusDiv = document.getElementById('form-status');
+                        const submitBtn = document.getElementById('contact-submit-btn');
+                        const btnSpan = submitBtn.querySelector('span');
+                        
+                        // Collect form data
+                        const email = document.getElementById('contact-email').value.trim();
+                        const message = document.getElementById('contact-message').value.trim();
+                        const honey = form.elements['_honey'].value;
+                        
+                        // 1. Client-side email validation regex (checks for standard structure name@domain.tld)
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            statusDiv.style.display = 'block';
+                            statusDiv.className = 'form-status-msg error';
+                            statusDiv.innerText = 'INVALID EMAIL FORMAT! ENTER A VALID EMAIL (E.G., NAME@DOMAIN.COM).';
+                            return;
+                        }
+                        
+                        // Set status to sending
+                        statusDiv.style.display = 'block';
+                        statusDiv.className = 'form-status-msg sending';
+                        statusDiv.innerText = 'SENDING MESSAGE...';
+                        submitBtn.disabled = true;
+                        btnSpan.innerText = 'SENDING...';
+                        
+                        // Honeypot spam protection check
+                        if (honey) {
+                            console.warn('Spam detected!');
+                            statusDiv.className = 'form-status-msg error';
+                            statusDiv.innerText = 'SPAM SUBMISSION DETECTED!';
+                            submitBtn.disabled = false;
+                            btnSpan.innerText = 'SEND MESSAGE';
+                            return;
+                        }
+                        
+                        // Send using Fetch API to FormSubmit.co
+                        fetch('https://formsubmit.co/ajax/avaneeshbhirdi3637@gmail.com', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                message: message
+                            })
+                        })
+                        .then(response => {
+                            // Read JSON payload even on non-200 responses to extract the exact server error message
+                            return response.json().then(data => {
+                                if (!response.ok) {
+                                    throw new Error(data.message || 'Server error occurred');
+                                }
+                                return data;
+                            });
+                        })
+                        .then(data => {
+                            if (data.success === 'true' || data.success === true) {
+                                // Success!
+                                statusDiv.className = 'form-status-msg success';
+                                statusDiv.innerText = 'MESSAGE SENT SUCCESSFULLY!';
+                                form.reset();
+                                
+                                // Auto hide success message after 5 seconds
+                                setTimeout(() => {
+                                    statusDiv.style.display = 'none';
+                                }, 5000);
+                            } else {
+                                throw new Error(data.message || 'Submission failed');
+                            }
+                        })
+                        .catch(err => {
+                            // If the error message is specifically from the server stating invalid email format, we show it directly
+                            if (err.message && (err.message.toLowerCase().includes('email') || err.message.toLowerCase().includes('valid'))) {
+                                statusDiv.className = 'form-status-msg error';
+                                statusDiv.innerText = err.message.toUpperCase();
+                                submitBtn.disabled = false;
+                                btnSpan.innerText = 'SEND MESSAGE';
+                                return;
+                            }
+                            
+                            // Fallback to urlencoded payload if json fails
+                            console.warn('JSON submit failed, attempting form encoded fallback...', err);
+                            const formData = new FormData();
+                            formData.append('email', email);
+                            formData.append('message', message);
+                            formData.append('_captcha', 'false');
+                            
+                            return fetch('https://formsubmit.co/ajax/avaneeshbhirdi3637@gmail.com', {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(res => {
+                                return res.json().then(data => {
+                                    if (!res.ok) {
+                                        throw new Error(data.message || 'Failed to submit form');
+                                    }
+                                    return data;
+                                });
+                            })
+                            .then(data => {
+                                if (data.success === 'true' || data.success === true) {
+                                    statusDiv.className = 'form-status-msg success';
+                                    statusDiv.innerText = 'MESSAGE SENT SUCCESSFULLY!';
+                                    form.reset();
+                                    setTimeout(() => {
+                                        statusDiv.style.display = 'none';
+                                    }, 5000);
+                                } else {
+                                    throw new Error(data.message || 'Submission failed');
+                                }
+                            })
+                            .catch(fallbackError => {
+                                console.error('Submission error:', fallbackError);
+                                statusDiv.className = 'form-status-msg error';
+                                statusDiv.innerText = fallbackError.message ? fallbackError.message.toUpperCase() : 'FAILED TO SEND MESSAGE. PLEASE TRY AGAIN.';
+                            })
+                            .finally(() => {
+                                submitBtn.disabled = false;
+                                btnSpan.innerText = 'SEND MESSAGE';
+                            });
+                        })
+                        .finally(() => {
+                            // Only reset button state here if fallback did not execute (fallback will handle its own finally)
+                            if (submitBtn.disabled) {
+                                submitBtn.disabled = false;
+                                btnSpan.innerText = 'SEND MESSAGE';
+                            }
+                        });
+                    });
+                </script>
             </div>
         </section>
 
