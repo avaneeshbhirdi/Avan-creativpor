@@ -352,6 +352,7 @@ window.closeProjectDetail = function() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await initProjects();
+    renderProjects();
     if (window.renderSoftware) window.renderSoftware();
     if (window.updateScrollButtons) window.updateScrollButtons();
     if (window.initRadarChart) window.initRadarChart();
