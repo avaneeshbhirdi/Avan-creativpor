@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Creative Portfolio",
   "scripts": {
-    "dev": "npx serve -p 3000",
-    "start": "npx serve -p 3000"
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "author": "Avaneesh Bhirdi",
   "license": "ISC"

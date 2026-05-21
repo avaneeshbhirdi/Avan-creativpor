@@ -182,19 +182,34 @@ const defaultProjects = [
     }
 ];
 
+
 let projectsData = [];
-try {
-    const stored = localStorage.getItem('portfolio_projects');
-    if (stored) {
-        projectsData = JSON.parse(stored);
-    } else {
-        projectsData = [...defaultProjects];
-        localStorage.setItem('portfolio_projects', JSON.stringify(projectsData));
+
+async function initProjects() {
+    try {
+        const res = await fetch('/js/projects.json');
+        if (res.ok) {
+            projectsData = await res.json();
+            // Sync to local storage as fallback
+            localStorage.setItem('portfolio_projects', JSON.stringify(projectsData));
+        } else {
+            throw new Error(`Failed to load: ${res.status}`);
+        }
+    } catch (e) {
+        console.warn("Could not load from projects.json, loading from localStorage/defaults:", e);
+        try {
+            const stored = localStorage.getItem('portfolio_projects');
+            if (stored) {
+                projectsData = JSON.parse(stored);
+            } else {
+                projectsData = [...defaultProjects];
+            }
+        } catch (err) {
+            projectsData = [...defaultProjects];
+        }
     }
-} catch (e) {
-    console.error("Failed to load projects from localStorage:", e);
-    projectsData = [...defaultProjects];
 }
+
 
 let currentSort = 'recent';
 let searchQuery = '';
@@ -335,8 +350,8 @@ window.closeProjectDetail = function() {
     if (header) header.style.display = '';
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects();
+document.addEventListener('DOMContentLoaded', async () => {
+    await initProjects();
     if (window.renderSoftware) window.renderSoftware();
     if (window.updateScrollButtons) window.updateScrollButtons();
     if (window.initRadarChart) window.initRadarChart();

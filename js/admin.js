@@ -67,10 +67,10 @@ function showLogin() {
     dashboardSection.style.display = 'none';
 }
 
-function showDashboard() {
+async function showDashboard() {
     loginSection.style.display = 'none';
     dashboardSection.style.display = 'block';
-    loadProjects();
+    await loadProjects();
     renderDashboard();
 }
 
@@ -83,8 +83,8 @@ loginForm.addEventListener('submit', (e) => {
         sessionStorage.setItem('admin_logged_in', 'true');
         loginError.style.display = 'none';
         showToast('Login Successful!', 'success');
-        setTimeout(() => {
-            showDashboard();
+        setTimeout(async () => {
+            await showDashboard();
         }, 500);
     } else {
         loginError.innerText = 'Invalid username or password!';
@@ -102,23 +102,52 @@ window.logout = function() {
 };
 
 // --- DATA ACCESS ---
-function loadProjects() {
+async function loadProjects() {
     try {
-        const stored = localStorage.getItem('portfolio_projects');
-        if (stored) {
-            projects = JSON.parse(stored);
+        const res = await fetch('/js/projects.json');
+        if (res.ok) {
+            projects = await res.json();
+            // Sync to local storage
+            localStorage.setItem('portfolio_projects', JSON.stringify(projects));
         } else {
-            projects = [...defaultProjects];
-            saveProjects();
+            throw new Error(`Failed to load: ${res.status}`);
         }
     } catch (e) {
-        console.error(e);
-        projects = [...defaultProjects];
+        console.warn("Could not load from projects.json, loading from localStorage/defaults:", e);
+        try {
+            const stored = localStorage.getItem('portfolio_projects');
+            if (stored) {
+                projects = JSON.parse(stored);
+            } else {
+                projects = [...defaultProjects];
+                await saveProjects();
+            }
+        } catch (err) {
+            projects = [...defaultProjects];
+        }
     }
 }
 
-function saveProjects() {
+async function saveProjects() {
     localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+    
+    try {
+        const res = await fetch('/api/save-projects', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(projects)
+        });
+        if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+                console.log("Successfully persisted projects to server codebase");
+            }
+        }
+    } catch (e) {
+        console.warn("Local codebase server persistence not available (normal in production):", e);
+    }
 }
 
 // --- RENDERING ---
@@ -417,6 +446,24 @@ window.copyCodeConfig = function() {
             console.error('Could not copy text: ', err);
             showToast('Copying failed!', 'danger');
         });
+};
+
+// --- DOWNLOAD JSON ---
+window.downloadJSON = function() {
+    const dataStr = JSON.stringify(projects, null, 4);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'projects.json';
+    document.body.appendChild(a);
+    a.click();
+    
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showToast('Downloaded projects.json!', 'success');
 };
 
 // --- TOAST ALERTS ---
