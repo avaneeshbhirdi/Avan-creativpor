@@ -6,7 +6,23 @@ window.switchSection = function(sectionId, btnElement) {
     });
     
     const targetSection = document.getElementById(sectionId);
-    if (targetSection) targetSection.classList.add('active');
+    if (targetSection) {
+        targetSection.classList.add('active');
+        
+        // Trigger animations for skills section
+        if (sectionId === 'skills') {
+            if (typeof gsap !== 'undefined') {
+                gsap.fromTo('.app-progress-fill', 
+                    { width: '0%' },
+                    { width: (i, target) => target.dataset.pct + '%', duration: 1.5, ease: 'power2.out', stagger: 0.1 }
+                );
+            } else {
+                document.querySelectorAll('.app-progress-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.pct + '%';
+                });
+            }
+        }
+    }
 
     if (btnElement) {
         document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
@@ -53,22 +69,24 @@ window.updateScrollButtons = function() {
 };
 
 const softwareCategoryMapping = {
-    all: ['premiere', 'ae', 'photoshop', 'illustrator', 'davinci', 'blender', 'flstudio', 'figma'],
+    all: ['premiere', 'ae', 'photoshop', 'illustrator', 'davinci', 'blender', 'flstudio', 'figma', 'scrite'],
     video: ['premiere', 'davinci', 'ae'],
     designing: ['illustrator', 'figma', 'photoshop'],
     music: ['flstudio'],
-    vfx: ['blender', 'ae', 'davinci']
+    vfx: ['blender', 'ae', 'davinci'],
+    scripting: ['scrite']
 };
 
 const softwareData = {
-    premiere: { name: 'Premiere Pro', img: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg', fallback: '' },
-    ae: { name: 'After Effects', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg', fallback: '' },
-    photoshop: { name: 'Photoshop', img: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg', fallback: '' },
-    illustrator: { name: 'Illustrator', img: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg', fallback: '' },
-    davinci: { name: 'DaVinci Resolve', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png', fallback: 'https://cdn.iconscout.com/icon/free/png-256/davinci-resolve-3628741-3030248.png' },
-    blender: { name: 'Blender', img: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg', fallback: '' },
-    flstudio: { name: 'FL Studio', img: 'https://img.icons8.com/color/512/fl-studio.png', fallback: '' },
-    figma: { name: 'Figma', img: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg', fallback: 'https://img.icons8.com/color/512/figma.png' }
+    premiere: { name: 'Premiere Pro', img: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg', fallback: '', pct: 100 },
+    ae: { name: 'After Effects', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg', fallback: '', pct: 85 },
+    photoshop: { name: 'Photoshop', img: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg', fallback: '', pct: 95 },
+    illustrator: { name: 'Illustrator', img: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg', fallback: '', pct: 90 },
+    davinci: { name: 'DaVinci Resolve', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png', fallback: 'https://cdn.iconscout.com/icon/free/png-256/davinci-resolve-3628741-3030248.png', pct: 80 },
+    blender: { name: 'Blender', img: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg', fallback: '', pct: 60 },
+    flstudio: { name: 'FL Studio', img: 'https://img.icons8.com/color/512/fl-studio.png', fallback: '', pct: 75 },
+    figma: { name: 'Figma', img: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg', fallback: 'https://img.icons8.com/color/512/figma.png', pct: 90 },
+    scrite: { name: 'Scrite', img: 'https://www.scrite.io/wp-content/uploads/2020/07/appicon-300x300.png', fallback: 'https://www.scrite.io/wp-content/uploads/2020/07/appicon-100x100.png', pct: 85 }
 };
 
 window.currentSoftwareCategory = 'all';
@@ -475,6 +493,28 @@ window.initRadarChart = function() {
     }
 
     container.appendChild(svg);
+
+    // Also render app progress bars below the chart
+    const barsContainer = document.getElementById('app-bars-container');
+    if (barsContainer) {
+        let barsHtml = '<h4 style="margin-bottom: 5px; font-weight: 800; font-size: 1.1rem; border-bottom: 2px solid #000; padding-bottom: 5px;">App Mastery</h4>';
+        const apps = Object.values(softwareData);
+        apps.forEach(app => {
+            const pct = app.pct || 80;
+            barsHtml += `
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700;">
+                        <span>${app.name}</span>
+                        <span>${pct}%</span>
+                    </div>
+                    <div style="width: 100%; height: 12px; background: #eee; border: var(--border-thick); box-shadow: 2px 2px 0 #000; border-radius: 6px; overflow: hidden;">
+                        <div class="app-progress-fill" data-pct="${pct}" style="width: 0%; height: 100%; background: var(--color-primary); border-right: var(--border-thick);"></div>
+                    </div>
+                </div>
+            `;
+        });
+        barsContainer.innerHTML = barsHtml;
+    }
 };
 
 
