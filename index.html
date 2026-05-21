@@ -153,7 +153,7 @@
         <!-- Projects Section -->
         <section id="projects" class="page-section">
             <div class="glass-panel mockup-panel split-panel" style="flex-direction: column;">
-                <div class="panel-header" style="padding: 30px 30px 0;">
+                <div class="panel-header" id="projects-panel-header" style="padding: 30px 30px 0;">
                     <h2>Projects</h2>
                 </div>
 
@@ -175,18 +175,17 @@
                 </div>
 
                 <!-- Detail view -->
-                <div id="projects-detail-view" style="display: none; padding: 0 30px 30px;">
+                <div id="projects-detail-view" style="display: none; padding: 30px;">
                     <button class="back-btn" onclick="closeProjectDetail()"
-                        style="margin-bottom: 20px; background: #fff; border: var(--border-thick); font-weight: 700; padding: 10px 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; box-shadow: 4px 4px 0 #000; text-transform: uppercase;"><i
+                        style="margin-bottom: 40px; background: #fff; border: var(--border-thick); font-weight: 700; padding: 10px 20px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; box-shadow: 4px 4px 0 #000; text-transform: uppercase;"><i
                             data-lucide="chevron-left"></i> Back to Projects</button>
 
                     <div style="display: flex; gap: 30px; flex-wrap: wrap;">
                         <img src="" alt="Project" id="proj-detail-img"
-                            style="width: 100%; max-width: 450px; height: 350px; object-fit: cover; border: var(--border-thick); box-shadow: 8px 8px 0 #000;">
+                            style="width: 100%; max-width: 450px; height: auto; border: var(--border-thick);">
 
                         <div style="flex: 1; min-width: 300px;">
-                            <h2 class="project-title-yellow" id="proj-detail-title" style="margin-bottom: 10px;">Title
-                            </h2><br>
+                            <h2 id="proj-detail-title" style="margin-top: 0; margin-bottom: 10px; font-size: 2.5rem; font-weight: 900; color: #000; text-transform: uppercase;">Title</h2>
                             <span class="project-subtitle" id="proj-detail-subtitle"
                                 style="margin-bottom: 20px; display: inline-block;">Subtitle</span>
 
@@ -196,6 +195,10 @@
                                     style="font-size: 1.1rem; line-height: 1.6; color: #000; font-weight: 600;"></p>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div id="proj-detail-links" style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+                        <!-- Dynamic links loaded by JS -->
                     </div>
                 </div>
             </div>

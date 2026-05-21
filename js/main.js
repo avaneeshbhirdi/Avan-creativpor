@@ -204,6 +204,16 @@ window.searchProjects = function() {
     renderProjects();
 };
 
+function parseViews(val) {
+    if (typeof val === 'number') return val;
+    if (!val) return 0;
+    let str = val.toString().toUpperCase().replace(/,/g, '');
+    let num = parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
+    if (str.includes('K')) num *= 1000;
+    if (str.includes('M')) num *= 1000000;
+    return num;
+}
+
 function renderProjects() {
     const container = document.getElementById('projects-container');
     if (!container) return;
@@ -214,7 +224,7 @@ function renderProjects() {
     } else if (currentSort === 'oldest') {
         sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (currentSort === 'popular') {
-        sorted.sort((a, b) => b.views - a.views);
+        sorted.sort((a, b) => parseViews(b.views) - parseViews(a.views));
     }
     
     container.innerHTML = '';
@@ -264,15 +274,65 @@ window.openProjectDetail = function(id) {
     document.getElementById('projects-list-view').style.display = 'none';
     document.getElementById('projects-detail-view').style.display = 'block';
     
+    const header = document.getElementById('projects-panel-header');
+    if (header) header.style.display = 'none';
+    
     document.getElementById('proj-detail-img').src = proj.img;
-    document.getElementById('proj-detail-title').innerText = proj.title;
-    document.getElementById('proj-detail-subtitle').innerText = proj.category + ' • ' + proj.views.toLocaleString() + ' Views';
+    document.getElementById('proj-detail-title').innerText = proj.detailTitle || proj.title;
+    let viewStr = proj.views;
+    if (typeof viewStr === 'number') {
+        viewStr = viewStr.toLocaleString();
+    }
+    document.getElementById('proj-detail-subtitle').innerText = proj.category + ' • ' + viewStr + ' Views';
     document.getElementById('proj-detail-desc').innerText = proj.desc;
+    
+    const linksContainer = document.getElementById('proj-detail-links');
+    if (linksContainer) {
+        linksContainer.innerHTML = '';
+        
+        // Support new links array or fallback to old btnText/link format
+        let links = proj.links || [];
+        if (links.length === 0 && proj.link) {
+            links.push({ text: proj.btnText || 'Watch Now', url: proj.link });
+        }
+        
+        // Filter out any links that don't have a URL
+        links = links.filter(link => link.url && link.url.trim() !== '');
+        
+        links.forEach((link, index) => {
+            const btn = document.createElement('a');
+            btn.href = link.url;
+            btn.target = "_blank";
+            
+            if (index === 0) {
+                // Primary link (Red)
+                btn.style.cssText = "display: inline-flex; align-items: center; gap: 10px; background: #FF4A4A; color: #fff; padding: 12px 25px; border: var(--border-thick); box-shadow: 6px 6px 0 #000; font-weight: 900; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: all 0.2s;";
+                btn.innerHTML = `<i data-lucide="play-circle" style="width: 22px; height: 22px;"></i> ${link.text}`;
+                btn.onmouseenter = () => { btn.style.transform = 'translate(2px, 2px)'; btn.style.boxShadow = '4px 4px 0 #000'; };
+                btn.onmouseleave = () => { btn.style.transform = 'translate(0px, 0px)'; btn.style.boxShadow = '6px 6px 0 #000'; };
+            } else {
+                // Secondary links (White)
+                btn.style.cssText = "display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; padding: 12px 25px; border: var(--border-thick); box-shadow: 6px 6px 0 #000; font-weight: 900; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: all 0.2s;";
+                btn.innerHTML = `<i data-lucide="external-link" style="width: 20px; height: 20px;"></i> ${link.text}`;
+                btn.onmouseenter = () => { btn.style.transform = 'translate(2px, 2px)'; btn.style.boxShadow = '4px 4px 0 #000'; btn.style.background = '#f4f4f4'; };
+                btn.onmouseleave = () => { btn.style.transform = 'translate(0px, 0px)'; btn.style.boxShadow = '6px 6px 0 #000'; btn.style.background = '#fff'; };
+            }
+            
+            linksContainer.appendChild(btn);
+        });
+        
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
 };
 
 window.closeProjectDetail = function() {
     document.getElementById('projects-detail-view').style.display = 'none';
     document.getElementById('projects-list-view').style.display = 'block';
+    
+    const header = document.getElementById('projects-panel-header');
+    if (header) header.style.display = '';
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -384,7 +444,7 @@ window.initRadarChart = function() {
         const tooltip = document.getElementById("radar-tooltip");
         if (!tooltip) return;
 
-        tooltip.innerHTML = `${item.name}: <span style="background: #fff; color: #000; padding: 1px 5px; margin-left: 5px; border: 2px solid #000; font-weight: 900; font-size: 0.9em; box-shadow: 1px 1px 0 #000;">${item.value}%</span>`;
+        tooltip.innerHTML = `${item.name} <span style="background: #fff; color: #000; padding: 1px 5px; margin-left: 5px; border: 2px solid #000; font-weight: 900; font-size: 0.9em; box-shadow: 1px 1px 0 #000;">${item.value}%</span>`;
         
         const r = (item.value / 100) * maxR;
         const angle = (index * 45 - 90) * Math.PI / 180;

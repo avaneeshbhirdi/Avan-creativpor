@@ -378,7 +378,7 @@ li { list-style: none; }
 .project-desc p { color: #000; line-height: 1.6; margin-bottom: 25px; font-size: 1rem; font-weight: 600; }
 
 /* --- LINKS / WORK SECTION --- */
-.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
 .portfolio-item {
   border: var(--border-thick); box-shadow: 8px 8px 0 #000; overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 4/3;
   transition: all var(--transition-fast); background: #fff;

@@ -125,6 +125,23 @@ function saveProjects() {
 function renderDashboard() {
     renderStats();
     renderTable();
+    updateCategoryDatalist();
+}
+
+function updateCategoryDatalist() {
+    const datalist = document.getElementById('category-options');
+    if (!datalist) return;
+    
+    const uniqueCategories = [...new Set(projects.map(p => p.category).filter(Boolean))];
+    const defaultCategories = ["Music Video", "Short Film", "Docu-series", "Commercial"];
+    const allCategories = [...new Set([...defaultCategories, ...uniqueCategories])];
+    
+    datalist.innerHTML = '';
+    allCategories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        datalist.appendChild(option);
+    });
 }
 
 function renderStats() {
@@ -183,10 +200,81 @@ function renderTable() {
     });
 }
 
+// --- FILE UPLOAD & COMPRESSION ---
+document.getElementById('proj-img-file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+            const MAX_WIDTH = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > MAX_WIDTH) {
+                height = Math.round((height * MAX_WIDTH) / width);
+                width = MAX_WIDTH;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+            document.getElementById('proj-img-data').value = compressedDataUrl;
+            document.getElementById('proj-img-preview').src = compressedDataUrl;
+            document.getElementById('proj-img-preview-container').style.display = 'block';
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+
 // --- CRUD OPERATIONS ---
+window.addLinkField = function(text = '', url = '') {
+    const container = document.getElementById('proj-links-container');
+    const index = container.children.length;
+    
+    const row = document.createElement('div');
+    row.style.display = 'grid';
+    row.style.gridTemplateColumns = index === 0 ? '1fr 2fr' : '1fr 2fr auto';
+    row.style.gap = '20px';
+    row.style.alignItems = 'start';
+    row.className = 'link-row';
+    
+    let removeBtnHtml = '';
+    if (index > 0) {
+        removeBtnHtml = `<button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()" style="margin-top: 25px;" title="Remove link">X</button>`;
+    }
+    
+    row.innerHTML = `
+        <div class="form-group">
+            <label>${index === 0 ? 'Button Text' : 'Additional Button'}</label>
+            <input type="text" class="form-input link-text" placeholder="e.g. Watch Now" value="${text || (index === 0 ? 'Watch Now' : '')}">
+        </div>
+        <div class="form-group">
+            <label>${index === 0 ? 'Button Link URL' : 'Link URL'}</label>
+            <input type="url" class="form-input link-url" placeholder="https://..." value="${url}">
+        </div>
+        ${removeBtnHtml}
+    `;
+    
+    container.appendChild(row);
+};
+
 window.openAddModal = function() {
     projectForm.reset();
     projectIdInput.value = '';
+    document.getElementById('proj-detail-title-input').value = '';
+    document.getElementById('proj-img-data').value = '';
+    document.getElementById('proj-img-preview').src = '';
+    document.getElementById('proj-img-preview-container').style.display = 'none';
+    document.getElementById('proj-links-container').innerHTML = '';
+    addLinkField();
     modalTitle.innerText = 'Add New Project';
     projectModal.classList.add('active');
 };
@@ -202,11 +290,32 @@ window.openEditModal = function(id) {
     modalTitle.innerText = 'Edit Project';
     projectIdInput.value = p.id;
     document.getElementById('proj-title').value = p.title;
+    document.getElementById('proj-detail-title-input').value = p.detailTitle || '';
     document.getElementById('proj-category').value = p.category;
     document.getElementById('proj-date').value = p.date;
     document.getElementById('proj-views').value = p.views;
-    document.getElementById('proj-img').value = p.img;
+    
+    // Set up image preview for edit
+    document.getElementById('proj-img-data').value = p.img || '';
+    if (p.img) {
+        document.getElementById('proj-img-preview').src = p.img;
+        document.getElementById('proj-img-preview-container').style.display = 'block';
+    } else {
+        document.getElementById('proj-img-preview-container').style.display = 'none';
+    }
+    
+    
     document.getElementById('proj-desc').value = p.desc;
+    
+    const container = document.getElementById('proj-links-container');
+    container.innerHTML = '';
+    
+    if (p.links && p.links.length > 0) {
+        p.links.forEach(l => addLinkField(l.text, l.url));
+    } else {
+        // Fallback for older data format
+        addLinkField(p.btnText || 'Watch Now', p.link || '');
+    }
 
     projectModal.classList.add('active');
 };
@@ -215,11 +324,26 @@ projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const idVal = projectIdInput.value;
     const title = document.getElementById('proj-title').value.trim();
+    const detailTitle = document.getElementById('proj-detail-title-input').value.trim();
     const category = document.getElementById('proj-category').value;
     const date = document.getElementById('proj-date').value;
-    const views = parseInt(document.getElementById('proj-views').value || 0);
-    const img = document.getElementById('proj-img').value.trim();
+    const views = document.getElementById('proj-views').value.trim() || '0';
+    const img = document.getElementById('proj-img-data').value.trim();
+    if (!img) {
+        showToast('Please select a thumbnail image to upload!', 'danger');
+        return;
+    }
     const desc = document.getElementById('proj-desc').value.trim();
+    
+    const links = [];
+    const linkRows = document.querySelectorAll('.link-row');
+    linkRows.forEach(row => {
+        const text = row.querySelector('.link-text').value.trim();
+        const url = row.querySelector('.link-url').value.trim();
+        if (url) {
+            links.push({ text: text || 'Watch Now', url: url });
+        }
+    });
 
     if (idVal) {
         // Edit Mode
@@ -228,11 +352,13 @@ projectForm.addEventListener('submit', (e) => {
             projects[index] = {
                 id: parseInt(idVal),
                 title,
+                detailTitle,
                 category,
                 date,
                 views,
                 img,
-                desc
+                desc,
+                links
             };
             showToast('Project updated successfully!', 'success');
         }
@@ -242,11 +368,13 @@ projectForm.addEventListener('submit', (e) => {
         const newProject = {
             id: newId,
             title,
+            detailTitle,
             category,
             date,
             views,
             img,
-            desc
+            desc,
+            links
         };
         projects.push(newProject);
         showToast('New project added successfully!', 'success');

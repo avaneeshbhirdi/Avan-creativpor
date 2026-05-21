@@ -110,20 +110,29 @@
                 <div class="modal-body">
                     <input type="hidden" id="project-id">
                     
-                    <div class="form-group">
-                        <label for="proj-title">Project Title</label>
-                        <input type="text" id="proj-title" class="form-input" required placeholder="e.g. Neon Nights">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="proj-title">Card Title (Short)</label>
+                            <input type="text" id="proj-title" class="form-input" required placeholder="e.g. UNDO">
+                        </div>
+                        <div class="form-group">
+                            <label for="proj-detail-title-input">Detail Title (Full)</label>
+                            <input type="text" id="proj-detail-title-input" class="form-input" placeholder="e.g. UNDO - A Short Film">
+                        </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div class="form-group">
                             <label for="proj-category">Category</label>
-                            <select id="proj-category" class="form-input" style="height: 48px; font-weight: 700; background: #fff;" required>
-                                <option value="Music Video">Music Video</option>
-                                <option value="Short Film">Short Film</option>
-                                <option value="Docu-series">Docu-series</option>
-                                <option value="Commercial">Commercial</option>
-                            </select>
+                            <input list="category-options" id="proj-category" class="form-input" style="height: 48px; font-weight: 700; background: #fff;" required placeholder="e.g. Short Film">
+                            <datalist id="category-options">
+                                <!-- Default options -->
+                                <option value="Music Video">
+                                <option value="Short Film">
+                                <option value="Docu-series">
+                                <option value="Commercial">
+                                <!-- Dynamic options loaded by JS -->
+                            </datalist>
                         </div>
                         <div class="form-group">
                             <label for="proj-date">Release Date</label>
@@ -134,17 +143,31 @@
                     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
                         <div class="form-group">
                             <label for="proj-views">View Count</label>
-                            <input type="number" id="proj-views" class="form-input" min="0" required placeholder="125000">
+                            <input type="text" id="proj-views" class="form-input" required placeholder="e.g. 25K+, 125000">
                         </div>
                         <div class="form-group">
-                            <label for="proj-img">Thumbnail Image URL</label>
-                            <input type="url" id="proj-img" class="form-input" required placeholder="https://images.unsplash.com/photo-...">
+                            <label for="proj-img-file">Thumbnail Image Upload</label>
+                            <input type="file" id="proj-img-file" class="form-input" accept="image/*" style="padding: 9px 15px;">
+                            <input type="hidden" id="proj-img-data">
+                            <div id="proj-img-preview-container" style="margin-top: 10px; display: none;">
+                                <img id="proj-img-preview" src="" style="width: 100%; max-height: 150px; object-fit: cover; border: 2px solid #000; box-shadow: 2px 2px 0 #000;">
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="proj-desc">Project Description</label>
                         <textarea id="proj-desc" class="form-input" rows="4" style="resize: vertical; font-family: inherit;" required placeholder="Provide a compelling description of the project, including your role and visual direction..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Project Links</label>
+                        <div id="proj-links-container" style="display: flex; flex-direction: column; gap: 15px;">
+                            <!-- Dynamically added link fields -->
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addLinkField()" style="align-self: flex-start; margin-top: 15px;">
+                            + Add Another Link
+                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">
