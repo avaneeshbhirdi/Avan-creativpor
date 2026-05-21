@@ -308,7 +308,7 @@ window.openProjectDetail = function(id) {
         // Support new links array or fallback to old btnText/link format
         let links = proj.links || [];
         if (links.length === 0 && proj.link) {
-            links.push({ text: proj.btnText || 'Watch Now', url: proj.link });
+            links.push({ text: proj.btnText || 'Watch Now', url: proj.link, isMain: true });
         }
         
         // Filter out any links that don't have a URL
@@ -319,7 +319,11 @@ window.openProjectDetail = function(id) {
             btn.href = link.url;
             btn.target = "_blank";
             
-            if (index === 0) {
+            // Primary link (Red) if explicitly marked as main. Fallback to index === 0 if no links have the isMain property defined.
+            const hasIsMainProperty = links.some(l => l.isMain !== undefined);
+            const isPrimary = hasIsMainProperty ? (link.isMain === true) : (index === 0);
+            
+            if (isPrimary) {
                 // Primary link (Red)
                 btn.style.cssText = "display: inline-flex; align-items: center; gap: 10px; background: #FF4A4A; color: #fff; padding: 12px 25px; border: var(--border-thick); box-shadow: 6px 6px 0 #000; font-weight: 900; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: all 0.2s;";
                 btn.innerHTML = `<i data-lucide="play-circle" style="width: 22px; height: 22px;"></i> ${link.text}`;

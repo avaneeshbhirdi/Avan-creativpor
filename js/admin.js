@@ -340,7 +340,25 @@ window.openEditModal = function(id) {
     container.innerHTML = '';
     
     if (p.links && p.links.length > 0) {
-        p.links.forEach(l => addLinkField(l.text, l.url));
+        const hasIsMain = p.links.some(l => l.isMain !== undefined);
+        let mainLink = null;
+        let additionalLinks = [];
+        
+        if (hasIsMain) {
+            mainLink = p.links.find(l => l.isMain === true);
+            additionalLinks = p.links.filter(l => l.isMain !== true);
+        } else {
+            mainLink = p.links[0];
+            additionalLinks = p.links.slice(1);
+        }
+        
+        if (mainLink) {
+            addLinkField(mainLink.text, mainLink.url);
+        } else {
+            addLinkField('Watch Now', '');
+        }
+        
+        additionalLinks.forEach(l => addLinkField(l.text, l.url));
     } else {
         // Fallback for older data format
         addLinkField(p.btnText || 'Watch Now', p.link || '');
@@ -366,11 +384,11 @@ projectForm.addEventListener('submit', (e) => {
     
     const links = [];
     const linkRows = document.querySelectorAll('.link-row');
-    linkRows.forEach(row => {
+    linkRows.forEach((row, idx) => {
         const text = row.querySelector('.link-text').value.trim();
         const url = row.querySelector('.link-url').value.trim();
         if (url) {
-            links.push({ text: text || 'Watch Now', url: url });
+            links.push({ text: text || 'Watch Now', url: url, isMain: idx === 0 });
         }
     });
 
