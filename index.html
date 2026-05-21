@@ -207,10 +207,7 @@
         <!-- Links / Work Section -->
         <section id="links" class="page-section">
             <div class="glass-panel mockup-panel"
-                style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
-                <div class="panel-header" style="margin-bottom: 40px;">
-                    <h2>Contact & Socials</h2>
-                </div>
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 40px; height: 80vh;">
                 
                 <div class="contact-container">
                     <!-- Column 1: Direct Message Form (Left) -->
@@ -231,7 +228,7 @@
                             
                             <div class="form-group">
                                 <label for="contact-message">YOUR MESSAGE</label>
-                                <textarea id="contact-message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+                                <textarea id="contact-message" name="message" rows="3" placeholder="Type your message here..." required></textarea>
                             </div>
                             
                             <button type="submit" id="contact-submit-btn">
@@ -284,10 +281,10 @@
                     .contact-container {
                         display: flex;
                         flex-direction: row;
-                        gap: 50px;
+                        gap: 40px;
                         width: 100%;
                         max-width: 950px;
-                        margin-top: 10px;
+                        margin-top: 0px;
                     }
                     
                     .contact-column {
@@ -306,16 +303,16 @@
                     }
                     
                     .column-header h3 {
-                        font-size: 1.8rem;
-                        margin-bottom: 25px;
+                        font-size: 1.4rem;
+                        margin-bottom: 15px;
                         color: #000;
                         font-weight: 800;
                         text-transform: uppercase;
                         background: var(--color-accent-blue);
                         display: inline-block;
-                        padding: 6px 15px;
+                        padding: 4px 12px;
                         border: 3px solid #000;
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 3px 3px 0 #000;
                         transform: rotate(1deg);
                     }
                     
@@ -328,18 +325,18 @@
                     .brutal-form {
                         display: flex;
                         flex-direction: column;
-                        gap: 20px;
+                        gap: 12px;
                         width: 100%;
                     }
                     
                     .form-group {
                         display: flex;
                         flex-direction: column;
-                        gap: 8px;
+                        gap: 5px;
                     }
                     
                     .form-group label {
-                        font-size: 1rem;
+                        font-size: 0.85rem;
                         font-weight: 900;
                         text-transform: uppercase;
                         letter-spacing: 0.5px;
@@ -350,13 +347,13 @@
                     .form-group input,
                     .form-group textarea {
                         width: 100%;
-                        padding: 12px 16px;
-                        font-size: 1rem;
+                        padding: 10px 14px;
+                        font-size: 0.95rem;
                         font-family: var(--font-main);
                         font-weight: 600;
                         border: var(--border-thick);
                         background: #fff;
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 3px 3px 0 #000;
                         transition: all 0.15s ease;
                         outline: none;
                         color: #000;
@@ -365,7 +362,7 @@
                     .form-group input:focus,
                     .form-group textarea:focus {
                         transform: translate(-2px, -2px);
-                        box-shadow: 6px 6px 0 var(--color-primary);
+                        box-shadow: 5px 5px 0 var(--color-primary);
                         background: #fff;
                     }
                     
@@ -374,25 +371,25 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        gap: 12px;
+                        gap: 10px;
                         background: var(--color-primary);
                         color: #fff;
                         font-family: var(--font-main);
                         font-weight: 900;
-                        font-size: 1.1rem;
+                        font-size: 1rem;
                         text-transform: uppercase;
-                        padding: 15px 30px;
+                        padding: 11px 22px;
                         border: var(--border-thick);
-                        box-shadow: 6px 6px 0 #000;
+                        box-shadow: 4px 4px 0 #000;
                         cursor: pointer;
                         transition: all 0.2s;
                         width: 100%;
-                        margin-top: 10px;
+                        margin-top: 5px;
                     }
                     
                     #contact-submit-btn:hover {
                         transform: translate(2px, 2px);
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 2px 2px 0 #000;
                         background: var(--color-secondary);
                         color: #000;
                     }
@@ -404,6 +401,8 @@
                     
                     #contact-submit-btn svg {
                         transition: transform 0.3s ease;
+                        width: 18px;
+                        height: 18px;
                     }
                     
                     #contact-submit-btn:hover svg {
@@ -415,7 +414,7 @@
                         display: flex;
                         align-items: center;
                         text-align: center;
-                        margin: 20px 0;
+                        margin: 10px 0;
                         width: 100%;
                     }
                     
@@ -427,9 +426,9 @@
                     }
                     
                     .contact-separator span {
-                        padding: 0 15px;
+                        padding: 0 12px;
                         font-weight: 900;
-                        font-size: 0.95rem;
+                        font-size: 0.85rem;
                         color: #000;
                         text-transform: uppercase;
                     }
@@ -439,16 +438,16 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        gap: 12px;
+                        gap: 10px;
                         background: #25D366;
                         color: #fff;
                         font-family: var(--font-main);
                         font-weight: 900;
-                        font-size: 1.1rem;
+                        font-size: 1rem;
                         text-transform: uppercase;
-                        padding: 15px 30px;
+                        padding: 11px 22px;
                         border: var(--border-thick);
-                        box-shadow: 6px 6px 0 #000;
+                        box-shadow: 4px 4px 0 #000;
                         cursor: pointer;
                         transition: all 0.2s;
                         width: 100%;
@@ -458,7 +457,7 @@
                     
                     .whatsapp-direct-btn:hover {
                         transform: translate(2px, 2px);
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 2px 2px 0 #000;
                         background: #20BA5A;
                         color: #fff;
                     }
@@ -469,8 +468,8 @@
                     }
                     
                     .whatsapp-direct-btn svg {
-                        width: 24px;
-                        height: 24px;
+                        width: 20px;
+                        height: 20px;
                         transition: transform 0.3s ease;
                     }
                     
@@ -482,7 +481,7 @@
                     .social-buttons-list {
                         display: flex;
                         flex-direction: column;
-                        gap: 15px;
+                        gap: 12px;
                         width: 100%;
                         max-width: 320px;
                     }
@@ -491,13 +490,13 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        gap: 12px;
-                        font-size: 1.1rem;
+                        gap: 10px;
+                        font-size: 1rem;
                         font-weight: 900;
                         color: #fff;
-                        padding: 12px 20px;
+                        padding: 10px 18px;
                         border: var(--border-thick);
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 3px 3px 0 #000;
                         text-transform: uppercase;
                         transition: all 0.2s;
                         width: 100%;
@@ -505,8 +504,8 @@
                     
                     .social-buttons-list .social-btn img,
                     .social-buttons-list .social-btn svg {
-                        width: 24px;
-                        height: 24px;
+                        width: 20px;
+                        height: 20px;
                         object-fit: contain;
                     }
                     
@@ -515,20 +514,20 @@
                     .social-buttons-list .linkedin { background: #0A66C2; }
                     
                     .social-buttons-list .social-btn:hover {
-                        transform: translate(2px, 2px);
+                        transform: translate(1px, 1px);
                         box-shadow: 2px 2px 0 #000 !important;
                     }
                     
                     /* Form status responses */
                     .form-status-msg {
-                        padding: 12px 16px;
+                        padding: 8px 12px;
                         font-weight: 800;
                         border: 3px solid #000;
-                        box-shadow: 4px 4px 0 #000;
+                        box-shadow: 3px 3px 0 #000;
                         text-align: center;
                         text-transform: uppercase;
-                        font-size: 0.95rem;
-                        margin-top: 15px;
+                        font-size: 0.85rem;
+                        margin-top: 10px;
                     }
                     .form-status-msg.success {
                         background: #25D366;
