@@ -63,7 +63,7 @@ function checkAuth() {
 }
 
 function showLogin() {
-    loginSection.style.display = 'block';
+    loginSection.style.display = 'flex';
     dashboardSection.style.display = 'none';
 }
 
