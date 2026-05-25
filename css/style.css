@@ -27,8 +27,10 @@ body {
   color: var(--text-main);
   font-family: var(--font-main);
   overflow: hidden;
+  overflow-x: hidden;
   height: 100vh;
   width: 100vw;
+  max-width: 100%;
   transition: background-color 0.3s;
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%233461E0" stroke="%231F2024" stroke-width="3"/></svg>') 16 16, auto;
 }
@@ -393,36 +395,211 @@ li { list-style: none; }
 .item-overlay h3 { color: #000; background: var(--color-primary); border: var(--border-thick); padding: 5px 15px; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; box-shadow: 4px 4px 0 #000; transform: rotate(-3deg); }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-  .hero-name { font-size: clamp(4rem, 15vw, 6rem); margin-bottom: 20px; }
-  .split-panel { flex-direction: column; }
-  .panel-left, .panel-right { padding: 30px; border-right: none; }
-  .panel-left { border-bottom: var(--border-thick); }
-  .mockup-slidebar { width: 100%; max-width: none; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; border-radius: 0; justify-content: flex-start; padding-left: 20px;}
-  .fixed-interface { padding: 20px 30px; }
-  .hero-content-left { left: 50%; top: 45%; bottom: auto; transform: translate(-50%, -50%); width: 90%; }
-  .software-grid { grid-template-columns: repeat(3, 1fr); }
+
+/* =====================================================
+   GLOBAL MOBILE SAFETY NET: prevent horizontal scroll
+   ===================================================== */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
+/* =====================================================
+   TABLET / 900px
+   ===================================================== */
+@media (max-width: 900px) {
+  /* Floating shapes shrink to not cause overflow */
+  .shape-1 { width: 60px; height: 60px; right: 8%; }
+  .shape-2 { width: 80px; height: 80px; }
+  .shape-3 { width: 50px; height: 50px; }
+
+  /* Download CV - reduce and reposition */
+  .fixed-interface { padding: 12px 15px; }
+  .download-btn { font-size: 0.75rem; padding: 8px 14px; box-shadow: 3px 3px 0 #000; }
+  .status-badge { display: none; }
+
+  /* Hero name */
+  .hero-name {
+    font-size: clamp(2.5rem, 11vw, 5rem);
+    line-height: 1.05;
+    word-break: break-word;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--color-primary), 6px 6px 0 #000;
+    margin-bottom: 20px;
+  }
+  .hero-content-left {
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 30px);
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  /* Panels */
+  .mockup-panel {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    padding: 25px 15px;
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Split panel stack */
+  .split-panel { flex-direction: column; overflow: hidden; }
+  .panel-left { padding: 20px 15px; border-right: none; border-bottom: var(--border-thick); overflow-x: hidden; }
+  .panel-right { padding: 20px 15px; overflow-x: hidden; }
+
+  /* Software grid */
+  .software-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  /* Slidebar */
+  .mockup-slidebar {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    justify-content: center;
+    padding: 12px 10px;
+    gap: 10px;
+  }
+
+  /* Marquee */
+  .marquee-content { font-size: 0.9rem; }
+}
+
+/* =====================================================
+   PHONE / 768px
+   ===================================================== */
 @media (max-width: 768px) {
-  .panel-header h2 { font-size: clamp(1.8rem, 6vw, 3rem); margin-bottom: 20px; }
-  .project-title-yellow { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-  .services-grid { grid-template-columns: 1fr; }
-  .portfolio-grid { grid-template-columns: 1fr; }
-  .software-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-  .mockup-panel { padding: 40px 25px; width: 95%; max-height: 85vh; }
-  button, .slide-btn, .download-btn, .back-btn { min-height: 48px; }
+  /* Hide the top action bar entirely - it overlaps content on every section */
+  .fixed-interface { display: none; }
+
+  /* Hero name - tighter clamp */
+  .hero-name {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    word-break: break-word;
+    text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--color-primary), 4px 4px 0 #000;
+  }
+
+  /* Panel header */
+  .panel-header h2 { font-size: clamp(1.4rem, 6vw, 2.5rem); margin-bottom: 15px; }
+
+  /* Project title */
+  .project-title-yellow { font-size: clamp(1.3rem, 5vw, 2rem); }
+
+  /* Grids */
+  .services-grid { grid-template-columns: 1fr; gap: 15px; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
+  .software-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; }
+
+  /* Panels */
+  .mockup-panel {
+    width: calc(100% - 16px);
+    padding: 20px 12px;
+    height: 84vh;
+    overflow-x: hidden;
+  }
+  .panel-left, .panel-right { padding: 15px 12px; }
+
+  /* Section headings */
+  .section-heading-yellow { font-size: 1.1rem; }
+
+  /* Filter buttons */
+  .software-filters { flex-wrap: wrap; gap: 8px; }
+  .soft-filter-btn { padding: 6px 12px; font-size: 0.75rem; }
+
+  /* Radar chart - fill the container */
+  #radar-chart-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Scroll buttons - hide on mobile */
+  #scroll-btn-left, #scroll-btn-right { display: none !important; }
+
+  /* Soft carousel */
+  .software-carousel-container { overflow: hidden; }
+  #software-scroll { gap: 10px; padding: 10px 2px; }
+  .soft-item { min-width: 90px !important; }
+
+  button, .slide-btn, .back-btn { min-height: 44px; }
   img { max-width: 100%; }
 }
 
+/* =====================================================
+   SMALL PHONES / 600px
+   ===================================================== */
 @media (max-width: 600px) {
-  .hero-name { font-size: clamp(3rem, 18vw, 4.5rem); line-height: 1; }
-  .hero-contact-grid { grid-template-columns: 1fr; gap: 10px; }
-  .mockup-panel { padding: 30px 15px; width: 100%; height: 85vh; border-left: none; border-right: none; }
-  .fixed-interface { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px; }
-  .status-badge { display: none; }
-  .panel-left, .panel-right { padding: 20px 15px; }
-  .service-card { padding: 20px; }
+  /* Hero name - really tight */
+  .hero-name {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+    line-height: 1.05;
+    word-break: break-word;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 var(--color-primary), 3px 3px 0 #000;
+  }
+  .hero-content-left {
+    width: calc(100% - 20px);
+    padding: 0 8px;
+  }
+
+  /* Marquee */
+  .marquee-content { font-size: 0.75rem; }
+  .marquee-container { margin-bottom: 12px; }
+
+  /* Panels */
+  .mockup-panel {
+    width: 100%;
+    height: 86vh;
+    padding: 14px 10px;
+    border-left: none;
+    border-right: none;
+    overflow-x: hidden;
+  }
+  .panel-left, .panel-right { padding: 12px 10px; }
+
+  /* Software grid */
+  .software-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .soft-item { min-width: unset !important; }
+
+  /* Services */
+  .services-grid { grid-template-columns: 1fr; gap: 12px; }
+  .service-card { padding: 14px; }
+
+  /* Panel header */
+  .panel-header h2 { font-size: clamp(1.1rem, 6vw, 1.8rem); }
+
+  /* Section heading */
+  .section-heading-yellow { font-size: 0.95rem; padding: 7px 10px; }
+
+  /* Radar chart */
+  #radar-chart-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    aspect-ratio: 1;
+  }
+
+  /* Portfolio */
+  .portfolio-grid { grid-template-columns: 1fr; gap: 12px; }
+  .portfolio-item { box-shadow: 4px 4px 0 #000; }
+
+  /* Project detail */
+  .project-title-yellow { font-size: clamp(1.1rem, 6vw, 1.6rem); transform: rotate(0deg); }
+  .project-subtitle { transform: rotate(0deg); }
+
+  /* Sort buttons row - wrap */
+  #projects-list-view > div:first-child { flex-wrap: wrap; gap: 8px; }
+
+  /* Slidebar */
+  .mockup-slidebar { padding: 10px 8px; gap: 8px; justify-content: center; }
+  .slide-btn { padding: 10px 12px; font-size: 0.85rem; }
+  .slide-btn.active { padding: 10px 16px; }
+
+  /* Hide floating shapes - they cause overflow */
+  .floating-shape { display: none; }
+
+  /* No custom cursors on touch */
   body, a, button, .service-card, .portfolio-item, .slide-btn, .project-detail-card .back-btn { cursor: auto; }
 }
 
