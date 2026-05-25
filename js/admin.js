@@ -77,9 +77,10 @@ async function showDashboard() {
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const usernameInput = document.getElementById('username').value.trim();
+    const emailInput = document.getElementById('email').value.trim();
     const passwordInput = document.getElementById('password').value;
 
-    if (usernameInput === 'admin' && passwordInput === 'password123') {
+    if ((usernameInput === 'avaneeshbhirdi' || usernameInput === 'admin') && emailInput === 'avaneeshbhirdi3637@gmail.com' && passwordInput === 'avanshree@0503') {
         sessionStorage.setItem('admin_logged_in', 'true');
         loginError.style.display = 'none';
         showToast('Login Successful!', 'success');
