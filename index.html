@@ -17,6 +17,12 @@
 
 <body class="spa-mode">
 
+    <!-- Mobile-only Download CV floating button -->
+    <a href="#" class="mobile-download-cv" id="mobile-cv-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CV
+    </a>
+
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
@@ -47,6 +53,11 @@
                     </div>
                 </div>
 
+                <!-- Mobile scroll hint -->
+                <div class="scroll-hint">
+                    <span>Swipe to explore</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
 
             </div>
         </section>
@@ -710,6 +721,15 @@
         </section>
 
     </main>
+
+    <!-- Swipe Dot Indicators -->
+    <div class="swipe-dots" id="swipe-dots">
+        <div class="swipe-dot active" data-target="home"></div>
+        <div class="swipe-dot" data-target="experience"></div>
+        <div class="swipe-dot" data-target="skills"></div>
+        <div class="swipe-dot" data-target="projects"></div>
+        <div class="swipe-dot" data-target="links"></div>
+    </div>
 
     <!-- Bottom Slidebar -->
     <div class="mockup-slidebar">

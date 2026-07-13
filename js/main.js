@@ -1,5 +1,7 @@
 /* js/main.js */
 
+const sectionOrder = ['home', 'experience', 'skills', 'projects', 'links'];
+
 window.switchSection = function(sectionId, btnElement) {
     document.querySelectorAll('.page-section').forEach(sec => {
         sec.classList.remove('active');
@@ -27,8 +29,65 @@ window.switchSection = function(sectionId, btnElement) {
     if (btnElement) {
         document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
         btnElement.classList.add('active');
+    } else {
+        // Update slidebar buttons when switching via swipe
+        document.querySelectorAll('.slide-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.target === sectionId);
+        });
     }
+
+    // Update swipe dots
+    document.querySelectorAll('.swipe-dot').forEach(dot => {
+        dot.classList.toggle('active', dot.dataset.target === sectionId);
+    });
 };
+
+/* --- SWIPE GESTURE NAVIGATION --- */
+(function() {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    const SWIPE_THRESHOLD = 50;
+    const SWIPE_MAX_VERTICAL = 80;
+
+    function getCurrentSectionIndex() {
+        const active = document.querySelector('.page-section.active');
+        if (!active) return 0;
+        return sectionOrder.indexOf(active.id);
+    }
+
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        touchStartTime = Date.now();
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        const deltaX = e.changedTouches[0].screenX - touchStartX;
+        const deltaY = e.changedTouches[0].screenY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+
+        // Only register horizontal swipes (not vertical scrolls)
+        if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+        if (Math.abs(deltaY) > SWIPE_MAX_VERTICAL) return;
+        if (elapsed > 600) return; // too slow = not a swipe
+
+        const currentIdx = getCurrentSectionIndex();
+        let nextIdx;
+
+        if (deltaX < 0) {
+            // Swipe left → next section
+            nextIdx = Math.min(currentIdx + 1, sectionOrder.length - 1);
+        } else {
+            // Swipe right → prev section
+            nextIdx = Math.max(currentIdx - 1, 0);
+        }
+
+        if (nextIdx !== currentIdx) {
+            window.switchSection(sectionOrder[nextIdx]);
+        }
+    }, { passive: true });
+})();
 
 window.scrollSoftware = function(direction) {
     const container = document.getElementById('software-scroll');
